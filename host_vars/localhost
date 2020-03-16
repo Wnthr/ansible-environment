@@ -1,0 +1,54 @@
+vim_bundle_dir: "{{ ansible_user_dir }}/.vim/bundle"
+create_directories:
+  - "{{ ansible_user_dir }}/src"
+  - "{{ ansible_user_dir }}/bin"
+  - "{{ ansible_user_dir }}/.vim"
+  - "{{ ansible_user_dir }}/.vim/autoload"
+  - "{{ vim_bundle_dir }}"
+
+install_packages:
+  all:
+    - vim-enhanced
+    - tmux2
+    - zsh
+    - git
+    - python3-pip
+    - python-flake8
+    - python36-mccabe
+  Fedora:
+    - python2-autopep8
+    - python3-autopep8
+  CentOS:
+    - python2-pip
+    - python3-pip
+    - https://repo.ius.io/ius-release-el7.rpm
+
+install_vim_bundles:
+  - name: vim-colors-solarized
+    repo: https://github.com/altercation/vim-colors-solarized.git
+  - name: vim-surround
+    repo: https://github.com/tpope/vim-surround.git
+  - name: emmet-vim
+    repo: https://github.com/mattn/emmet-vim.git
+  - name: vim-gitgutter
+    repo: https://github.com/airblade/vim-gitgutter.git
+  - name: ansible-vim
+    repo: https://github.com/pearofducks/ansible-vim.git
+  - name: tabular
+    repo: https://github.com/godlygeek/tabular.git
+  - name: lightline.vim
+    repo: https://github.com/itchyny/lightline.vim.git
+  - name: ale
+    repo: https://github.com/w0rp/ale.git
+  - name: ultisnips
+    repo: https://github.com/SirVer/ultisnips.git
+  - name: lightline-solarized
+    repo: https://github.com/taohexxx/lightline-solarized.git
+  - name: vim-textobj-user
+    repo: https://github.com/kana/vim-textobj-user.git
+  - name: vim-textobj-variable-segment
+    repo: https://github.com/Julian/vim-textobj-variable-segment.git
+  - name: vim-textobj-python
+    repo: https://github.com/bps/vim-textobj-python.git
+  - name: vim-flake8
+    repo: https://github.com/nvie/vim-flake8.git

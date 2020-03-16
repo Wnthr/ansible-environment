@@ -1,0 +1,70 @@
+---
+- name: Playbook for configuring my environment
+  hosts: all
+  become: false
+  tasks:
+  - name: Install base packages we need and want
+    yum:
+      name: "{{ install_packages.all }}"
+      state: latest
+    become: true
+
+  - name: Install Fedora-specific packages
+    yum:
+      name: "{{ install_packages.Fedora|default(omit) }}"
+      state: present
+    become: true
+    when: ansible_facts['distribution'] == 'Fedora'
+
+  - name: Install CentOS-specific packages
+    yum:
+      name: "{{ install_packages.CentOS|default(omit) }}"
+      state: present
+    become: true
+    when: ansible_facts['distribution'] == 'CentOS'
+
+  - name: Create necessary directories
+    file:
+      dest: "{{ item }}"
+      state: directory
+      mode: 0755
+    loop:
+      "{{ create_directories }}"
+
+  - name: Install Pathogen
+    file:
+      src: "{{ ansible_user_dir }}/src/vim-pathogen/autoload/pathogen.vim"
+      dest: "{{ ansible_user_dir }}/.vim/autoload/"
+      state: hard
+      force: yes
+
+  - name: Download vim bundles
+    git:
+      repo: "{{ item.repo }}"
+      dest: "{{ vim_bundle_dir }}/{{ item.name }}"
+    loop:
+      "{{ install_vim_bundles }}"
+
+  - name: Get vimrc dotfile from github
+    git:
+      repo: 'git@github.com:Wnthr/dotfiles.git'
+      dest: "{{ ansible_user_dir }}/src/dotfiles"
+    ignore_errors: yes
+
+  - name: Hard link .vimrc from dotfiles repo
+    file:
+      src: "{{ ansible_user_dir }}/src/dotfiles/vimrc"
+      dest: "{{ ansible_user_dir }}/.vimrc"
+      state: hard
+      force: yes
+
+  - name: Install autopep8
+    pip:
+      name: autopep8
+    become: true
+    when: ansible_facts['distribution'] == 'CentOS'
+
+  - name: Install python diceware
+    pip:
+      name: diceware
+    become: true
