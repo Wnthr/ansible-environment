@@ -31,6 +31,11 @@
     loop:
       "{{ create_directories }}"
 
+  - name: Download Pathogen git repo
+    git:
+      repo: "https://github.com/tpope/vim-pathogen"
+      dest: "{{ ansible_user_dir }}/src/vim-pathogen"
+
   - name: Install Pathogen
     file:
       src: "{{ ansible_user_dir }}/src/vim-pathogen/autoload/pathogen.vim"
