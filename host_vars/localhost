@@ -19,6 +19,7 @@ install_packages:
     - python2-autopep8
     - python3-autopep8
   CentOS:
+    - autopep8
     - python2-pip
     - python3-pip
     - https://repo.ius.io/ius-release-el7.rpm
