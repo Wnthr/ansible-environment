@@ -50,18 +50,21 @@
     loop:
       "{{ install_vim_bundles }}"
 
-  - name: Get vimrc dotfile from github
+  # FIXME: This should handle not having access to ssh
+  - name: Get dotfiles from github
     git:
       repo: 'git@github.com:Wnthr/dotfiles.git'
       dest: "{{ ansible_user_dir }}/src/dotfiles"
     ignore_errors: yes
 
-  - name: Hard link .vimrc from dotfiles repo
+  - name: Hardlink config files to dotfiles repo
     file:
-      src: "{{ ansible_user_dir }}/src/dotfiles/vimrc"
-      dest: "{{ ansible_user_dir }}/.vimrc"
+      src: "{{ ansible_user_dir }}/{{ item.src }}"
+      dest: "{{ ansible_user_dir }}/{{ item.dest }}"
       state: hard
       force: yes
+    loop:
+      "{{ hardlink_dotfiles }}"
 
   - name: Install python diceware
     pip:

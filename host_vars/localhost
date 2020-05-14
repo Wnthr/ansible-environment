@@ -53,3 +53,11 @@ install_vim_bundles:
     repo: https://github.com/bps/vim-textobj-python.git
   - name: vim-flake8
     repo: https://github.com/nvie/vim-flake8.git
+
+hardlink_dotfiles:
+  - src: /src/dotfiles/gitconfig
+    dest: .gitconfig
+  - src: /src/dotfiles/vimrc
+    dest: .vimrc
+  - src: /src/dotfiles/tmux.conf
+    dest: .tmux.conf
