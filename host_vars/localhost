@@ -7,7 +7,7 @@ create_directories:
   - "{{ vim_bundle_dir }}"
 
 install_packages:
-  all:
+  RedHat:
     - vim-enhanced
     - zsh
     - git

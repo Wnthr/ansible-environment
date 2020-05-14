@@ -3,11 +3,12 @@
   hosts: all
   become: false
   tasks:
-  - name: Install base packages we need and want
+  - name: Install base packages for Red Hat
     yum:
-      name: "{{ install_packages.all }}"
+      name: "{{ install_packages.all|default(omit) }}"
       state: latest
     become: true
+    when: ansible_os_family == 'RedHat'
 
   - name: Install Fedora-specific packages
     yum:
