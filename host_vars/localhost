@@ -23,6 +23,10 @@ install_packages:
     - python3-pip
     - python36-mccabe
     - https://repo.ius.io/ius-release-el7.rpm
+  MacOSX:
+    - zsh
+    - vim
+    - tmux
 
 install_vim_bundles:
   - name: vim-colors-solarized

@@ -24,6 +24,12 @@
     become: true
     when: ansible_facts['distribution'] == 'CentOS'
 
+  - name: Install macOS-specific packages
+    homebrew:
+      name: "{{ install_packages.MacOSX|default(omit) }}"
+      state: present
+    when: ansible_distribution == 'MacOSX'
+
   - name: Create necessary directories
     file:
       dest: "{{ item }}"
