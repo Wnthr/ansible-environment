@@ -45,8 +45,8 @@ install_vim_bundles:
     repo: https://github.com/itchyny/lightline.vim.git
   - name: ale
     repo: https://github.com/w0rp/ale.git
-  - name: ultisnips
-    repo: https://github.com/SirVer/ultisnips.git
+    #  - name: ultisnips
+    #    repo: https://github.com/SirVer/ultisnips.git
   - name: lightline-solarized
     repo: https://github.com/taohexxx/lightline-solarized.git
   - name: vim-textobj-user
