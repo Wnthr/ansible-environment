@@ -9,19 +9,19 @@ create_directories:
 install_packages:
   all:
     - vim-enhanced
-    - tmux2
     - zsh
     - git
     - python3-pip
     - python-flake8
-    - python36-mccabe
   Fedora:
-    - python2-autopep8
+    - tmux
     - python3-autopep8
   CentOS:
+    - tmux2
     - autopep8
     - python2-pip
     - python3-pip
+    - python36-mccabe
     - https://repo.ius.io/ius-release-el7.rpm
 
 install_vim_bundles:
